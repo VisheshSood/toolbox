@@ -1,2 +1,3 @@
-# toolbox
-Info 343 Challenge - Expand Your Toolbox
+Expand Your Toolbox!
+----
+This respository helps in teaching users how to use Backbone.js and Underscore.js. 
