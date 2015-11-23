@@ -12,4 +12,4 @@ To run my demo, you can visit [here](http://visheshsd.com/toolbox/) and the code
 
 ###For More Information
 
-[P5js.org](p5js.org) is the homepage for this library. [Start](http://p5js.org/get-started/) by going to this page and learning how to run P5.js, and for tutorials, visit [here](http://p5js.org/tutorials/). For other demos, visit [here](http://p5js.org/examples/).
+[P5js.org](p5js.org) is the homepage for this library. Start by going to [this](http://p5js.org/get-started/) page and learning how to run P5.js, and for tutorials, visit [here](http://p5js.org/tutorials/). For other demos, visit [here](http://p5js.org/examples/).
