@@ -41,10 +41,11 @@ function setup() {
   noStroke();
   colorMode(HSB, 90);
 
-  // make canvas drag'n'dropablle with gotFile as the callback
+  // make canvas drag'n'dropable with gotFile as the callback
   makeDragAndDrop(cnv, gotFile);
-
-  soundFile = loadSound('../backup-music/thehills.mp3')
+  //Initially, we want the soundfile to be a mp3 file stored in our back up music.
+  soundFile = loadSound('js/thehills.mp3')
+  //P5 has a way to use the microphone as an audio input.
   mic = new p5.AudioIn();
   osc = new p5.Oscillator();
   osc.amp(0.9); // amplitude
@@ -56,7 +57,7 @@ function setup() {
   for (var i = 0; i < binCount; i++) {
     bins[i] = new Bin(i, binCount);
   }
-  toggleInput(1); //Allow to listen from
+  toggleInput(1); //Allow to listen from, by using index 1. Change to 0 for mp3 source.s
 }
 
 /*
@@ -141,7 +142,6 @@ function windowResized() {
   background(0);
 }
 
-
 /*
   We need to take the user inputs and carry out the required tasks. P5 does not have case sensitive
   key inputs, and it is called by key.
@@ -155,9 +155,14 @@ function keyPressed() {
 //Start with the Microphone as input
 var inputMode = 1;
 
-
 /*
-  
+  We need to make sure that when the user presses the letter T on their keyboard, we can toggle
+  the different audio sources. 
+  We start by using a counter, and if the counter is even then use the custom source, or if the 
+  counter is odd, use mic. 
+  We start by asking if the mode passed in to the method is of type number. If it is, then we can set
+  the input to be that number. If not, we want to increment our initial counter and then mod by 2
+  to see if its even or not.
 */
 function toggleInput(mode) {
   if (typeof(mode) === 'number') {
@@ -166,6 +171,11 @@ function toggleInput(mode) {
     inputMode += 1;
     inputMode = inputMode % 2;
   }
+  /*
+    Now we need to choose the source by using a case system. If its even, we stop the mic input
+    and play the sound file. Else we want to use the microphone's input.
+    The code is pretty self explanatory and this is because p5 takes care of most stuff for us.
+  */
   switch (inputMode) {
     case 0: // soundFile mode
       soundFile.play();
@@ -182,6 +192,11 @@ function toggleInput(mode) {
       break;
   }
 }
+
+/*
+  We need a function to call when the mouse moves so that we can update the colors of the bars
+  that the mouse if overlaping and also for the labels. We only want this if there is a source of audio.
+*/
 function mouseMoved() {
   if (soundFile.isLoaded()) {
     for (var i = 0; i < bins.length; i++) {
@@ -196,7 +211,7 @@ function mouseMoved() {
 }
 
 // ==========
-// Bin Class
+// Bin Class - This was found online on the P5 website and is part of their data visualization packages.
 // ==========
 
 var Bin = function(index, totalBins) {
